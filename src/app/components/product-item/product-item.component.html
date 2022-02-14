@@ -5,6 +5,6 @@
 	<div>{{ product.name }}</div>
 	<div>&#x24;{{ product.price }}</div>
 	<input class="select-input" min="0" name="quantity" value="{{ itemQuantity || 1 }}" type="number" #quantity>
-	<button class="btn btn-primary" (click)="addToCart(product, quantity.value)">Add to card</button>
+	<button class="btn btn-primary" (click)="addProduct(product, quantity.value)">Add to card</button>
 	<div class="product-message">{{ message }}</div>
 </div>

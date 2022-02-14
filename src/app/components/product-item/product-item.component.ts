@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from '../../models/Product';
 import { CartService } from '../../services/cart.service';
 
@@ -9,6 +9,7 @@ import { CartService } from '../../services/cart.service';
 })
 export class ProductItemComponent implements OnInit {
   @Input() product: Product;
+  @Output() addToCart: EventEmitter<Product> = new EventEmitter;
   message!: string;
   itemQuantity!: number;
   constructor(
@@ -30,9 +31,9 @@ export class ProductItemComponent implements OnInit {
     }
   }
 
-  addToCart(product: Product, quantity: string): void {
+  addProduct(product: Product, quantity: string): void {
     product.quantity = Number(quantity);
-    this.cartService.addToCart(product);
+    this.addToCart.emit(product);
     this.message = `Added to your cart!`;
     setTimeout(() => this.message = '', 5000);
   }
