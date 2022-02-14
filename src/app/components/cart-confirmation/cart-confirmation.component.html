@@ -1,0 +1,12 @@
+<div class="confirmation-container">
+	<div class="confirmation-items" *ngIf="isRouting else emptyConfirmationMessage">
+		<h1>Success!</h1>
+		<div>Thank you! <strong>{{ fullName }}</strong></div>
+		<div>Your &#x24;{{ total }} order is confirmed!</div>
+		<div class="confirmation-shipping">Please allow 1-3 bussiness day(s) for shipping.</div>
+		<div><a class="btn btn-info" routerLink="/"> &#8592; Back to product list</a></div>
+	</div>
+	<ng-template #emptyConfirmationMessage>
+		<div>You do not have any confirmation information!<br><br><a class="btn btn-info" routerLink="/"> &#8592; Back to product list</a></div>
+	</ng-template>
+</div>

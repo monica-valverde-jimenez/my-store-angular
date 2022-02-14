@@ -1,0 +1,55 @@
+<div class="cart-container">
+	<div class="cart-panel" *ngIf="listProducts.length > 0 else emptyMessage">
+		<div class="cart-item" *ngFor="let product of listProducts">
+			<div><img class="cart-product-image" src="{{ product.url }}"></div>
+			<div class="cart-item-details">
+				<h2>{{ product.name }}</h2>
+				<span>{{ product.price }}</span>
+				<div>
+					<span>Amount:</span>
+					<div><input class="number-input" min="0" name="quantity" value="{{ product.quantity }}" type="number"  #quantity (change)="updateCart(product.id, quantity.value)"></div>
+				</div>
+				<div class="cart-item-wrapper">
+					<button type="button" class="btn btn-primary" (click)="removeItem(product.id)">Remove</button>
+				</div>
+			</div>
+		</div>
+		<div>
+			<h3>Total: &#x24; {{ total }}</h3>
+		</div>
+	</div>
+	<div class="cart-panel" *ngIf="listProducts.length > 0">
+		<form #form="ngForm" (ngSubmit)="onSubmit()">
+			<div class="form-group">
+				<label for="inputName">Full name</label>
+				<input type="text" class="form-control" name="fullname" required minlength="3" [(ngModel)]="fullName" placeholder="(minimum 3 characters)" #clientFullName="ngModel">
+			  </div>
+			  <div class="form-group">
+				<label for="inputAddress">Address</label>
+				<input type="text" class="form-control" name="address" required minlength="6" [(ngModel)]="address" placeholder="(minimum 6 characters)" #clientAddress="ngModel">
+			  </div>
+			  <div class="form-group">
+				<label for="inputCard">Credit Card</label>
+				<input type="text" class="form-control" name="creditCard" pattern="^[0-9]*$" required minlength="16" maxlength="16" #creditCardNumber="ngModel" [(ngModel)]="creditCard" placeholder="(16 - digit number)">
+				<small class="form-text text-muted">We'll never share your payment details with anyone else.</small>
+			  </div>
+			  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Submit</button>
+			  <div class="alert alert-danger" *ngIf="clientFullName.dirty && clientFullName.invalid">
+				<div *ngIf="clientFullName.errors?.['minlength']">
+                    Full name min lenght is 3 characters.
+                </div>
+			  </div>
+			  <div class="alert alert-danger" *ngIf="clientAddress.dirty && clientAddress.invalid">
+				<div *ngIf="clientAddress.errors?.['minlength']">
+                    Address min lenght is 3 characters.
+                </div>
+			  </div>
+			  <div *ngIf="creditCardNumber.dirty && creditCardNumber.invalid">
+                <div class="alert alert-danger" *ngIf="creditCardNumber.errors?.['pattern']">
+                    Only Numbers allowed.
+                </div>
+            </div>
+		  </form>
+	</div>
+	<ng-template #emptyMessage>Your cart is empty!</ng-template>
+</div>

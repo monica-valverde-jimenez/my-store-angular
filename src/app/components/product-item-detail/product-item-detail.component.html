@@ -1,0 +1,12 @@
+<div class="detail-message">{{ message }}</div>
+<div class="detail-container">
+	<img class="product-image" src="{{ product.url }}">
+	<div class="detail-item">
+		<h1>{{ product.name }}</h1>
+		<div>&#x24; {{ product.price }}</div>
+		<div  class="detail-description">{{ product.description }}</div>
+		<div><input class="select-input" min="0" name="quantity" value="{{ itemQuantity || 1 }}" type="number" #quantity></div>
+		<div><button class="btn btn-primary" (click)="addToCart(product, quantity.value)">Add to card</button></div>
+		<div class="back-link"><a routerLink="/"> &#8592; Back to product list</a></div>
+	</div>
+</div>
